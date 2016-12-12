@@ -357,7 +357,13 @@
             /**
              * type to validate against
              */
-            vtype: null
+            vtype: null,
+
+            /**
+             */
+            onTabClick: function(json) {
+                return;
+            }
         };
 
         var conf = $.extend({},options);
@@ -1017,6 +1023,8 @@
                     asText = cfg.resultAsString === true && !_hasFocus;
 
                 ms.selectionContainer.find('.ms-sel-item').remove();
+                $(ms).off('tabClicked');
+
                 if(ms._valueContainer !== undefined) {
                     ms._valueContainer.remove();
                 }
@@ -1051,6 +1059,7 @@
                         }
                     }
 
+                    selectedItemEl.on('click' , $.proxy(handlers._onTabClick, ref));
                     items.push(selectedItemEl);
                 });
                 ms.selectionContainer.prepend(items);
@@ -1293,6 +1302,15 @@
                         }
                     }
                 }
+            },
+
+            /**
+             * Triggered when clicking on the input text field
+             * @private
+             */
+            _onTabClick: function(e){
+                var json = $(e.currentTarget).data('json');
+                cfg.onTabClick(json);
             },
 
             /**

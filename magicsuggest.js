@@ -362,7 +362,7 @@
             /**
              * @ginoEdit
              */
-            onTabClick: function(json) {
+            onTabClick: function(e, json) {
                 return;
             },
 
@@ -1320,7 +1320,7 @@
              */
             _onTabClick: function(e){
                 var json = $(e.currentTarget).data('json');
-                cfg.onTabClick(json);
+                cfg.onTabClick(ms, json);
             },
 
             /**
